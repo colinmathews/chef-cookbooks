@@ -33,14 +33,20 @@ log_group_name = <%= node[:opsworks][:stack][:name].gsub(' ','_') %>
 file = <%= node[:cwlogs][:logfile] %>
 log_stream_name = <%= node[:opsworks][:instance][:hostname] %>
 
-[<%= node[:opsworks][:stack][:name] %>-concerns]
+[<%= node[:opsworks][:stack][:name] %>-warnings]
 datetime_format = %Y-%m-%dT%H:%M:%S.%fZ
 log_group_name = <%= node[:opsworks][:stack][:name].gsub(' ','_') %>-concerns
 file = <%= node[:cwlogs][:logfileErrors] %>
 log_stream_name = app-errors
 
-[<%= node[:opsworks][:stack][:name] %>-concerns]
+[<%= node[:opsworks][:stack][:name] %>-errors]
 datetime_format = %Y-%m-%dT%H:%M:%S.%fZ
 log_group_name = <%= node[:opsworks][:stack][:name].gsub(' ','_') %>-concerns
 file = <%= node[:cwlogs][:logfileWarnings] %>
 log_stream_name = app-warnings
+
+[/var/log/messages]
+datetime_format = %Y-%m-%dT%H:%M:%S.%fZ
+log_group_name = /var/log/messages
+file = <%= node[:cwlogs][:logfileSystem] %>
+log_stream_name = <%= node[:opsworks][:instance][:hostname] %>
